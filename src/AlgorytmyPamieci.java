@@ -66,7 +66,7 @@ public class AlgorytmyPamieci {
                 bledyStron++;
 
                 if (ramki.size() >= iloscRamek) {
-                    ramki.remove(0); //Usuwamy najdawniej używaną
+                    ramki.removeFirst(); //Usuwamy najdawniej używaną
                 }
                 ramki.add(strona); //Nowa ramka idzie na koniec
             }
