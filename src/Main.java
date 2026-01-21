@@ -4,20 +4,26 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Main {
+    private static final String PLIK_DANYCH_PROCESORA = "dane_cpu.txt";
+    private static final String PLIK_DANYCH_PAMIECI = "dane_pamiec.txt";
+    private static final String PLIK_WYNIKOWY = "wyniki_eksperymentow.txt";
+    private final static double PRAWDOPODOBIENSTWO_LOKALNOSCI = 0.88;
+    private final static int ZAKRES_STRON_LOKALNOSCI = 5;
+
+
     public static void main(String[] args) {
         Random rand = new Random();
-        ManagerLogow logger = new ManagerLogow("wyniki_eksperymentow.txt");
-
+        ManagerLogow logger = new ManagerLogow(PLIK_WYNIKOWY);
         // --- Parametry dla Zadania 1 (Procesor) ---
         int LICZBA_PROCESOW = 30;       // Ile procesów wygenerować
-        int KWANT_CZASU     = 4;        // Kwant czasu dla Round Robin
+        int KWANT_CZASU = 4;        // Kwant czasu dla Round Robin
         int MAX_CZAS_PRZYJSCIA = 50;    // Zakres losowania czasu przyjścia
-        int MAX_DLUGOSC_FAZY   = 30;    // Zakres losowania długości procesu
-        int ROZMIAR_KOLA    = 6;       // Wielkość ROund RObin
+        int MAX_DLUGOSC_FAZY = 30;    // Zakres losowania długości procesu
+        int ROZMIAR_KOLA = 6;       // Wielkość ROund RObin
         // --- Parametry dla Zadania 2 (Pamięć) ---
-        int DLUGOSC_CIAGU   = 50;       // Ile odwołań do pamięci wygenerować
-        int ZAKRES_STRON    = 60;       // Numery stron od 1 do 20
-        int ILOSC_RAMEK     = 6;        // Ile ramek ma pamięć fizyczna (spróbuj zmienić na 3 lub 6)
+        int DLUGOSC_CIAGU = 50;       // Ile odwołań do pamięci wygenerować
+        int ZAKRES_STRON = 60;       // Numery stron od 1 do 20
+        int ILOSC_RAMEK = 6;        // Ile ramek ma pamięć fizyczna (spróbuj zmienić na 3 lub 6)
 
 
         // SYmulacja dla procesora
@@ -31,7 +37,7 @@ public class Main {
         }
 
         //Zapis danych do pliku
-        zapiszDaneTestoweCPU(daneTestoweCPU, "dane_cpu.txt");
+        zapiszDaneTestoweCPU(daneTestoweCPU, PLIK_DANYCH_PROCESORA);
 
         //Kopiowanie danych dla algorytmów
         List<Proces> listaSJF = new ArrayList<>();
@@ -43,7 +49,7 @@ public class Main {
 
         //Uruchomienie algorytmów
         AlgorytmyProcesora.symulacjaSJF(listaSJF, logger);
-        AlgorytmyProcesora.symulacjaRR(listaRR, KWANT_CZASU,ROZMIAR_KOLA, logger);
+        AlgorytmyProcesora.symulacjaRR(listaRR, KWANT_CZASU, ROZMIAR_KOLA, logger);
 
         // Symulacja pamięci
         logger.log("\n=== ZADANIE 2: Zastępowanie Stron ===");
@@ -52,12 +58,12 @@ public class Main {
         //Generowanie danych
         int[] odwolywania = new int[DLUGOSC_CIAGU];
         //algorytm losowania uzględniający lokalność odwołań
-        for(int i=0; i<DLUGOSC_CIAGU; i++) {
-            if (rand.nextDouble() < 0.8) {
-                // 80% szans na odwołanie do stron 1-5
-                odwolywania[i] = rand.nextInt(5) + 1;
+        for (int i = 0; i < DLUGOSC_CIAGU; i++) {
+            if (rand.nextDouble() < PRAWDOPODOBIENSTWO_LOKALNOSCI) {
+                if (ZAKRES_STRON_LOKALNOSCI > 0 && ZAKRES_STRON_LOKALNOSCI <= ZAKRES_STRON) {
+                    odwolywania[i] = rand.nextInt(ZAKRES_STRON_LOKALNOSCI) + 1;
+                }
             } else {
-                // 20%
                 odwolywania[i] = rand.nextInt(ZAKRES_STRON) + 1;
             }
         }
@@ -67,7 +73,7 @@ public class Main {
             odwolywania[i] = rand.nextInt(ZAKRES_STRON) + 1;
         }*/
         //Zapis danych do pliku
-        zapiszDaneTestowePamiec(odwolywania, "dane_pamiec.txt");
+        zapiszDaneTestowePamiec(odwolywania, PLIK_DANYCH_PAMIECI);
 
         //Uruchomienie algorytmów
         AlgorytmyPamieci.symulacjaLRU(odwolywania, ILOSC_RAMEK, logger);
@@ -76,7 +82,7 @@ public class Main {
 
         // Zamykamy zapis do pliku
         logger.zamknij();
-        System.out.println("\nZakończono. Wyniki w pliku 'wyniki_eksperymentow.txt'.");
+        System.out.println("\nZakończono. Wyniki w pliku '" + PLIK_WYNIKOWY + "'.");
     }
 
     private static void zapiszDaneTestoweCPU(List<Proces> procesy, String nazwaPliku) {

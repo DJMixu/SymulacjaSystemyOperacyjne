@@ -37,6 +37,10 @@ public class Proces implements Cloneable {
     // Metoda do klonowania
     @Override
     public Proces clone() {
-        try { return (Proces) super.clone(); } catch (CloneNotSupportedException e) { return null; }
+        try {
+            return (Proces) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 }

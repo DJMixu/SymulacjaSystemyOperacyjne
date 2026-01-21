@@ -42,6 +42,7 @@ public class ManagerLogow {
             writer.println();
         }
     }
+
     //zamyka
     public void zamknij() {
         if (writer != null) {

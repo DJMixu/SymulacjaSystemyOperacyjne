@@ -128,7 +128,7 @@ public class AlgorytmyProcesora {
         logger.log("------------------------------------------------");
         logger.log("Średni czas oczekiwania: " + (sumaCzasuOczekiwania / n));
         logger.log("Średni czas przetwarzania: " + (sumaCzasuPrzetwarzania / n));
-        logger.log("Sumaryczny czas przetwarzania: " + sumaCzasuPrzetwarzania); // <--- WYŚWIETLANIE SUMY
+        logger.log("Sumaryczny czas przetwarzania: " + sumaCzasuPrzetwarzania);
         logger.log("Maksymalny czas oczekiwania: " + maxCzasOczekiwania);
         logger.log("\n");
     }
