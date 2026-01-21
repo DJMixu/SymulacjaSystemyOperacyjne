@@ -13,6 +13,12 @@ public class AlgorytmyProcesora {
         double sumaCzasuOczekiwania = 0;
         double sumaCzasuPrzetwarzania = 0;
 
+        //Walidacja danych
+        if (listaProcesow == null || listaProcesow. isEmpty()) {
+            logger.log("ERROR: Brak procesów do symulacji!");
+            return;
+        }
+
         logger.log("--- Wyniki SJF ---");
         logger.logTylkoPlik(String.format("%-5s %-15s %-15s", "ID", "Czas Oczek.", "Czas Przetw."));
 
@@ -49,8 +55,8 @@ public class AlgorytmyProcesora {
         }
 
         logger.log("------------------------------------------------");
-        logger.log("Średni czas oczekiwania: " + (sumaCzasuOczekiwania / n));
-        logger.log("Średni czas przetwarzania: " + (sumaCzasuPrzetwarzania / n));
+        logger.log("Średni czas oczekiwania: " + String.format("%.2f", sumaCzasuOczekiwania / n));
+        logger.log("Średni czas przetwarzania: " + String.format("%.2f", sumaCzasuPrzetwarzania / n));
         logger.log("Sumaryczny czas przetwarzania: " + sumaCzasuPrzetwarzania);
         logger.log("\n");
     }
@@ -59,6 +65,20 @@ public class AlgorytmyProcesora {
     public static void symulacjaRR(List<Proces> listaProcesow, int kwantCzasu, int limitMiejscWKole, ManagerLogow logger) {
         Queue<Proces> poczekalnia = new LinkedList<>();
         Queue<Proces> aktywneKolo = new LinkedList<>();
+
+        //Walidacja danych
+        if (listaProcesow == null || listaProcesow. isEmpty()) {
+            logger.log("ERROR:  Brak procesów!");
+            return;
+        }
+        if (kwantCzasu <= 0) {
+            logger.log("ERROR: Kwant czasu musi być > 0!");
+            return;
+        }
+        if (limitMiejscWKole <= 0) {
+            logger.log("ERROR: Limit miejsc musi być > 0!");
+            return;
+        }
 
         int czasObecny = 0;
         // Sortujemy po przyjściu, żeby wiedzieć kto kiedy wchodzi
@@ -126,8 +146,8 @@ public class AlgorytmyProcesora {
         }
         //Zapis do logów
         logger.log("------------------------------------------------");
-        logger.log("Średni czas oczekiwania: " + (sumaCzasuOczekiwania / n));
-        logger.log("Średni czas przetwarzania: " + (sumaCzasuPrzetwarzania / n));
+        logger.log("Średni czas oczekiwania: " + String.format("%.2f", sumaCzasuOczekiwania / n));
+        logger.log("Średni czas przetwarzania: " + String.format("%.2f", sumaCzasuPrzetwarzania / n));
         logger.log("Sumaryczny czas przetwarzania: " + sumaCzasuPrzetwarzania);
         logger.log("Maksymalny czas oczekiwania: " + maxCzasOczekiwania);
         logger.log("\n");
