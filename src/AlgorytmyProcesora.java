@@ -6,6 +6,7 @@ public class AlgorytmyProcesora {
     public static void symulacjaSJF(List<Proces> listaProcesow, ManagerLogow logger) {
         int czasObecny = 0;
         int ukonczone = 0;
+        int maxCzasOczekiwania = 0;
         int n = listaProcesow.size();
         boolean[] wykonany = new boolean[n];
 
@@ -47,7 +48,7 @@ public class AlgorytmyProcesora {
 
                 wykonany[indeksNajkrotszego] = true;
                 ukonczone++;
-
+                if (p.czasOczekiwania > maxCzasOczekiwania) maxCzasOczekiwania = p.czasOczekiwania;
                 logger.logTylkoPlik(String.format("P%-4d %-15d %-15d", p.id, p.czasOczekiwania, p.czasPrzetwarzania));
             } else {
                 czasObecny++;
@@ -58,6 +59,7 @@ public class AlgorytmyProcesora {
         logger.log("Średni czas oczekiwania: " + String.format("%.2f", sumaCzasuOczekiwania / n));
         logger.log("Średni czas przetwarzania: " + String.format("%.2f", sumaCzasuPrzetwarzania / n));
         logger.log("Sumaryczny czas przetwarzania: " + sumaCzasuPrzetwarzania);
+        logger.log("Maksymalny czas oczekiwania: " + maxCzasOczekiwania);
         logger.log("\n");
     }
 

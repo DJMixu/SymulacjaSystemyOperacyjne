@@ -2,7 +2,7 @@ import java.util.*;
 
 public class AlgorytmyPamieci {
 
-    // --- FIFO (First In First Out) ---
+    //FIFO (First In First Out)
     public static void symulacjaFIFO(int[] strony, int iloscRamek, ManagerLogow logger) {
         Queue<Integer> kolejkaRamek = new LinkedList<>();
         Set<Integer> stronyWRamkach = new HashSet<>();
@@ -40,7 +40,7 @@ public class AlgorytmyPamieci {
         logger.log("Trafienia (Hits): " + (strony.length - bledyStron));
     }
 
-    // --- LRU (Least Recently Used) ---
+    //LRU (Least Recently Used)
     public static void symulacjaLRU(int[] strony, int iloscRamek, ManagerLogow logger) {
         // Używamy Listy:
         // Indeks 0 = Najdawniej używana (do usunięcia)
@@ -66,9 +66,9 @@ public class AlgorytmyPamieci {
                 bledyStron++;
 
                 if (ramki.size() >= iloscRamek) {
-                    ramki.remove(0); // Usuwamy najdawniej używaną (początek listy)
+                    ramki.remove(0); //Usuwamy najdawniej używaną
                 }
-                ramki.add(strona); // Nowa idzie na koniec
+                ramki.add(strona); //Nowa ramka idzie na koniec
             }
 
             String ramkiStr = ramki.toString();

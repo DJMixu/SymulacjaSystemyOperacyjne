@@ -15,10 +15,10 @@ public class Main {
         Random rand = new Random();
         ManagerLogow logger = new ManagerLogow(PLIK_WYNIKOWY);
         // --- Parametry dla Zadania 1 (Procesor) ---
-        int LICZBA_PROCESOW = 30;       // Ile procesów wygenerować
+        int LICZBA_PROCESOW = 10;       // Ile procesów wygenerować
         int KWANT_CZASU = 4;        // Kwant czasu dla Round Robin
         int MAX_CZAS_PRZYJSCIA = 50;    // Zakres losowania czasu przyjścia
-        int MAX_DLUGOSC_FAZY = 30;    // Zakres losowania długości procesu
+        int MAX_BURST_TIME = 20;    // Zakres losowania długości procesu
         int ROZMIAR_KOLA = 6;       // Wielkość ROund RObin
         // --- Parametry dla Zadania 2 (Pamięć) ---
         int DLUGOSC_CIAGU = 50;       // Ile odwołań do pamięci wygenerować
@@ -33,7 +33,7 @@ public class Main {
         //Generowanie danych
         List<Proces> daneTestoweCPU = new ArrayList<>();
         for (int i = 0; i < LICZBA_PROCESOW; i++) {
-            daneTestoweCPU.add(new Proces(i, rand.nextInt(MAX_CZAS_PRZYJSCIA), rand.nextInt(MAX_DLUGOSC_FAZY) + 1));
+            daneTestoweCPU.add(new Proces(i, rand.nextInt(MAX_CZAS_PRZYJSCIA), rand.nextInt(MAX_BURST_TIME) + 1));
         }
 
         //Zapis danych do pliku
