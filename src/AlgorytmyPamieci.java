@@ -9,7 +9,7 @@ public class AlgorytmyPamieci {
         int bledyStron = 0;
 
         logger.log("\n--- Wyniki symulacji FIFO (Ramki: " + iloscRamek + ") ---");
-        logger.log(String.format("%-6s %-10s %-15s %-20s", "Krok", "Strona", "Status", "Zawartość Ramek"));
+        logger.logTylkoPlik(String.format("%-6s %-10s %-15s %-20s", "Krok", "Strona", "Status", "Zawartość Ramek"));
         logger.log("-------------------------------------------------------------");
 
         for (int i = 0; i < strony.length; i++) {
@@ -35,7 +35,7 @@ public class AlgorytmyPamieci {
             logger.logTylkoPlik(String.format("%-6d %-10d %-15s %-20s", (i + 1), strona, status, ramkiStr));
         }
 
-        logger.log("-------------------------------------------------------------");
+        logger.logTylkoPlik("-------------------------------------------------------------");
         logger.log("Suma błędów stron (Page Faults): " + bledyStron);
         logger.log("Trafienia (Hits): " + (strony.length - bledyStron));
     }
@@ -49,7 +49,7 @@ public class AlgorytmyPamieci {
         int bledyStron = 0;
 
         logger.log("\n--- Wyniki symulacji LRU (Ramki: " + iloscRamek + ") ---");
-        logger.log(String.format("%-6s %-10s %-15s %-20s", "Krok", "Strona", "Status", "Zawartość Ramek"));
+        logger.logTylkoPlik(String.format("%-6s %-10s %-15s %-20s", "Krok", "Strona", "Status", "Zawartość Ramek"));
         logger.log("-------------------------------------------------------------");
 
         for (int i = 0; i < strony.length; i++) {
@@ -58,7 +58,7 @@ public class AlgorytmyPamieci {
 
             if (ramki.contains(strona)) {
                 status = "HIT";
-                // Aktualizacja LRU: usuwamy z obecnej pozycji i dajemy na koniec (jako "najświeższą")
+                // Aktualizacja LRU: usuwamy z obecnej pozycji i dajemy na koniec, czyli najdalej do usunięcia
                 ramki.remove((Integer) strona);
                 ramki.add(strona);
             } else {
@@ -75,7 +75,7 @@ public class AlgorytmyPamieci {
             logger.logTylkoPlik(String.format("%-6d %-10d %-15s %-20s", (i + 1), strona, status, ramkiStr));
         }
 
-        logger.log("-------------------------------------------------------------");
+        logger.logTylkoPlik("-------------------------------------------------------------");
         logger.log("Suma błędów stron (Page Faults): " + bledyStron);
         logger.log("Trafienia (Hits): " + (strony.length - bledyStron));
     }
