@@ -8,9 +8,7 @@ public class ManagerLogow {
 
     public ManagerLogow(String nazwaPliku) {
         try {
-            // false oznacza, że przy każdym uruchomieniu kasujemy stary plik i piszemy od nowa
             FileWriter fw = new FileWriter(nazwaPliku, false);
-            // 'true' tutaj oznacza auto-flush (automatyczny zapis po każdym println)
             writer = new PrintWriter(fw, true);
             dzialaZapis = true;
         } catch (IOException e) {
@@ -35,7 +33,7 @@ public class ManagerLogow {
         }
     }
 
-    //Wypisuje pustą linię (odstęp).
+    //Wypisuje pustą linię.
     public void nowaLinia() {
         System.out.println();
         if (dzialaZapis && writer != null) {
