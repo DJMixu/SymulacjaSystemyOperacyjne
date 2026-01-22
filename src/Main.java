@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    private static boolean ODCZYT_Z_PLIKU = true;
     private static final String PLIK_DANYCH_PROCESORA = "dane_cpu.txt";
     private static final String PLIK_DANYCH_PAMIECI = "dane_pamiec.txt";
     private static final String PLIK_WYNIKOWY = "wyniki_eksperymentow.txt";
@@ -20,7 +21,6 @@ public class Main {
     private final static int DLUGOSC_CIAGU = 50;       // Ile odwołań do pamięci wygenerować
     private final static int ZAKRES_STRON = 60;       // Numery stron od 1 do 20
     private final static int ILOSC_RAMEK = 6;        // Ile ramek ma pamięć fizyczna (spróbuj zmienić na 3 lub 6)
-    private static boolean ODCZYT_Z_PLIKU = true;
 
     public static void main(String[] args) {
         ManagerLogow logger = new ManagerLogow(PLIK_WYNIKOWY);
